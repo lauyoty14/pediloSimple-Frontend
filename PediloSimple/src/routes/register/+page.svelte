@@ -1,22 +1,40 @@
 <script>
-    let email = '';
+    let mail = '';
     let companyName = '';
     let password = '';
     let cuit = '';
-    let phoneNumber = '';
+    let telephone = '';
     let contact = '';
     let deliveryZone = '';
     let businessHours = '';
     let address = '';
   
-    function handleSubmit() {
-      // Add your logic to handle form submission here
-    }
+    async function handleSubmit(company) {
+      try {
+        company.preventDefault();
+        const response = await fetch('http://localhost:8081/v1/clients/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ mail, companyName, password, cuit, telephone, contact, deliveryZone, businessHours, address }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was wrong');
+        }
+
+        const result = await response.json();
+        console.log(result.message);
+      } catch (error) {
+        console.error('Error during fetch:', error);
+      }
+}
 </script>
   
 <form on:submit|preventDefault={handleSubmit}>
-    <label for="email">Email:</label>
-    <input type="email" id="email" bind:value={email} required>
+    <label for="mail">Email:</label>
+    <input type="mail" id="mail" bind:value={mail} required>
   
     <label for="companyName">Nombre de la compañía:</label>
     <input type="text" id="companyName" bind:value={companyName} required>
@@ -27,8 +45,8 @@
     <label for="cuit">CUIT:</label>
     <input type="text" id="cuit" bind:value={cuit} required>
   
-    <label for="phoneNumber">Número de teléfono:</label>
-    <input type="tel" id="phoneNumber" bind:value={phoneNumber} required>
+    <label for="telephone">Número de teléfono:</label>
+    <input type="tel" id="telephone" bind:value={telephone} required>
   
     <label for="contact">Contacto:</label>
     <input type="text" id="contact" bind:value={contact} required>
