@@ -1,5 +1,5 @@
 <script>
-    let mail = '';
+    let email = '';
     let companyName = '';
     let password = '';
     let cuit = '';
@@ -10,14 +10,15 @@
     let address = '';
   
     async function handleSubmit(company) {
+      company.preventDefault();
+      const client = { email, companyName, password, cuit, telephone, contact, deliveryZone, businessHours, address};
       try {
-        company.preventDefault();
-        const response = await fetch('http://localhost:8081/v1/clients/register', {
+        const response = await fetch('http://localhost:8081/v1/clients/register',{
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ mail, companyName, password, cuit, telephone, contact, deliveryZone, businessHours, address }),
+          body: JSON.stringify(client),
         });
 
         if (!response.ok) {
@@ -25,7 +26,8 @@
         }
 
         const result = await response.json();
-        console.log(result.message);
+        console.log('compania registrada :', result);
+
       } catch (error) {
         console.error('Error during fetch:', error);
       }
@@ -33,32 +35,32 @@
 </script>
   
 <form on:submit|preventDefault={handleSubmit}>
-    <label for="mail">Email:</label>
-    <input type="mail" id="mail" bind:value={mail} required>
+    <label for="email">Email:</label>
+    <input type="email" id="email" bind:value={email} required>
   
     <label for="companyName">Nombre de la compañía:</label>
-    <input type="text" id="companyName" bind:value={companyName} required>
+    <input type="text" id="companyName" bind:value={companyName}>
   
     <label for="password">Contraseña:</label>
     <input type="password" id="password" bind:value={password} required>
   
     <label for="cuit">CUIT:</label>
-    <input type="text" id="cuit" bind:value={cuit} required>
+    <input type="text" id="cuit" bind:value={cuit}>
   
     <label for="telephone">Número de teléfono:</label>
-    <input type="tel" id="telephone" bind:value={telephone} required>
+    <input type="tel" id="telephone" bind:value={telephone}>
   
     <label for="contact">Contacto:</label>
-    <input type="text" id="contact" bind:value={contact} required>
+    <input type="text" id="contact" bind:value={contact}>
   
     <label for="deliveryZone">Zona de delivery:</label>
-    <input type="text" id="deliveryZone" bind:value={deliveryZone} required>
+    <input type="text" id="deliveryZone" bind:value={deliveryZone}>
   
     <label for="businessHours">Horario:</label>
-    <input type="text" id="businessHours" bind:value={businessHours} required>
+    <input type="text" id="businessHours" bind:value={businessHours}>
   
     <label for="address">Dirección:</label>
-    <input type="text" id="address" bind:value={address} required>
+    <input type="text" id="address" bind:value={address}>
   
     <button type="submit">Registrarse</button>
 </form>
