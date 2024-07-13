@@ -7,9 +7,9 @@
     let contact = '';
     let deliveryZone = '';
     let businessHours = '';
-    let address = '';
-  
-    async function handleSubmit(company) {
+    let address = ''; 
+    
+    async function handleSubmit(company){
       company.preventDefault();
       const client = { email, companyName, password, cuit, telephone, contact, deliveryZone, businessHours, address};
       try {

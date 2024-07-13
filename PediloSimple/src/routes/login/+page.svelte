@@ -1,4 +1,4 @@
-<script>
+<script> 
     let email = '';
     let password = '';
     let companyName = '';
@@ -9,24 +9,34 @@
     let hours = '';
     let address = '';
 
-    function handleSubmit() {
-        // Aca se mandan los datos al backend para verificarlos
-        // Luego redirige a otra página
-        console.log(email, password, companyName, cuit, phoneNumber, contact, deliveryZone, hours, address);
-        window.location.href = '/agregar_producto';
-    }
+    // Función para manejar el envío del formulario
+    async function handleSubmit(company){
+        company.preventDefault();
+        // Aquí puedes hacer la lógica de autenticación, por ejemplo, enviando los datos a tu servidor
+        const response = await fetch('http://localhost:8081/v1/clients/login',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+            if (response.ok) {
+                console.log('Inicio de sesión exitoso', data);
+                window.location.href = '/admin-Company'
+                } else {
+                console.error('Error en el inicio de sesión', data);
+            }
+        }
+        console.log(email, password);
+    
 </script>
 
 <form on:submit|preventDefault={handleSubmit}>
     <input type="email" bind:value={email} placeholder="Correo electrónico" required>
     <input type="password" bind:value={password} placeholder="Contraseña" required>
-    <input type="text" bind:value={companyName} placeholder="Nombre de la compañía" required>
-    <input type="text" bind:value={cuit} placeholder="Cuit" required>
-    <input type="tel" bind:value={phoneNumber} placeholder="Número de teléfono" required>
-    <input type="text" bind:value={contact} placeholder="Contacto" required>
-    <input type="text" bind:value={deliveryZone} placeholder="Zona de delivery" required>
-    <input type="text" bind:value={hours} placeholder="Horario" required>
-    <input type="text" bind:value={address} placeholder="Dirección" required>
     <button type="submit">Iniciar sesión</button>
 </form>
 
