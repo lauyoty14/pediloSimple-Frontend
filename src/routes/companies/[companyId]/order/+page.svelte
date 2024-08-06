@@ -19,7 +19,7 @@
     onMount(() => {
         const urlParams = new URLSearchParams(window.location.search);
         cart = JSON.parse(urlParams.get('cart') || '[]');
-        console.log('carrito:', cart);
+        //console.log('carrito:', cart);
         calculateTotal();
     });
 

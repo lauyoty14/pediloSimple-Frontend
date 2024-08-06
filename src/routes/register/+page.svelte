@@ -9,6 +9,7 @@
     let businessHours = '';
     let address = ''; 
     
+    // @ts-ignore
     async function handleSubmit(company){
       company.preventDefault();
       const client = { email, companyName, password, cuit, telephone, contact, deliveryZone, businessHours, address};
