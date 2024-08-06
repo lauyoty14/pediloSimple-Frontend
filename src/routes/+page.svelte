@@ -28,4 +28,5 @@
     <h1>Bienvenido a la Compañía de Alimentos</h1>
     <a href="/login">Iniciar sesión</a>
     <a href="/register">Registrarse</a>
+    <a href="/users">Usuarios</a>
 </main>

@@ -1,3 +1,4 @@
+// @ts-ignore
 export const load = ({ params }) => {
     //console.log('Params:', params);
     try {
