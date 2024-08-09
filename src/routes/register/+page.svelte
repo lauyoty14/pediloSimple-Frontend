@@ -28,7 +28,9 @@
 
         const result = await response.json();
         console.log('compania registrada :', result);
-
+        const { companyId } = result;
+        window.location.href = `/login`;
+        
       } catch (error) {
         console.error('Error during fetch:', error);
       }
