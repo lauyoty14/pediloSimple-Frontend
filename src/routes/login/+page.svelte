@@ -1,15 +1,9 @@
 <script> 
   let email = '';
   let password = '';
-  let companyName = '';
-  let cuit = '';
-  let phoneNumber = '';
-  let contact = '';
-  let deliveryZone = '';
-  let hours = '';
-  let address = '';
 
   // Función para manejar el envío del formulario
+  // @ts-ignore
   async function handleSubmit(event) {
     event.preventDefault();
 
